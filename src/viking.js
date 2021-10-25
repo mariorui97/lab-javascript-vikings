@@ -70,25 +70,29 @@ class War {
   }
 
   vikingAttack(){
-    let randomSaxon = this.saxonArmy[Math.floor(Math.random() * this.saxonArmy.length)]
-    let randomViking = this.vikingArmy[Math.floor(Math.random() * this.vikingArmy.length)]
+    let randomSaxon = this.saxonArmy[Math.floor(Math.random() * (this.saxonArmy.length -1))]
+    let randomViking = this.vikingArmy[Math.floor(Math.random() * (this.vikingArmy.length -1))]
 
-    let result = randomViking.receiveDamage(randomViking.strength)
+    if (randomSaxon === undefined) return 
+    let result = randomSaxon.receiveDamage(randomViking.strength)
       
     this.saxonArmy = this.saxonArmy.filter( health => health > 0 ) 
-
+    return result
    }
 
    saxonAttack(){
-    let randomSaxon = this.saxonArmy[Math.floor(Math.random() * this.saxonArmy.length)]
-    let randomViking = this.vikingArmy[Math.floor(Math.random() * this.vikingArmy.length)]
-
-    let result = randomSaxon.receiveDamage(randomSaxon.strength)
+    let randomSaxon = this.saxonArmy[Math.floor(Math.random() * (this.saxonArmy.length -1)) ]
+    let randomViking = this.vikingArmy[Math.floor(Math.random() * (this.vikingArmy.length -1))]
+    
+    if (randomViking === undefined) return //shoutout to my friend Leo for helping me with this one
+    let result = randomViking.receiveDamage(randomSaxon.strength)
       
     this.vikingArmy = this.vikingArmy.filter( health => health > 0 ) 
+    return result
+  }
 
-    
-
+   showStatus(){ 
+    return this.saxonArmy.length == 0 ? 'Vikings have won the war of the century!' : this.vikingArmy.length == 0 ? "Saxons have fought for their lives and survived another day..." : "Vikings and Saxons are still in the thick of battle."
    }
 }
 
